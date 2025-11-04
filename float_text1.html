@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天冷加衣满屏飘字效果</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            overflow: hidden;
+        }
+        .text-item {
+            position: absolute;
+            color: #fff;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .text-item.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const texts = [
+            "天冷了，莫子希多穿件衣服",
+            "莫子希记得添衣，别着凉",
+            "天凉了，莫子希注意保暖",
+            "莫子希冷了就多穿点，别冻着",
+            "降温了，莫子希加件外套",
+            "天气冷，莫子希多穿衣服哦",
+            "天冷多加衣，莫子希照顾好自己",
+            "天寒了，莫子希记得穿暖和",
+            "降温啦，莫子希记得加衣服",
+            "天冷了，莫子希别忘穿厚点",
+            "寒气来了，莫子希多穿衣物",
+            "天冷注意添衣保暖，莫子希",
+            "天凉别忘加件衣，莫子希",
+            "冷天到，莫子希多穿衣服才对"
+        ];
+        const colors = [
+            "#ff4d4f", "#fa8c16", "#fadb14", "#52c41a", "#1890ff", "#722ed1",
+            "#f5222d", "#fa541c", "#faad14", "#52c41a", "#1890ff", "#722ed1", "#b469ff"
+        ];
+
+        function createText() {
+            const textEl = document.createElement("div");
+            textEl.className = "text-item";
+            textEl.innerText = texts[Math.floor(Math.random() * texts.length)];
+            textEl.style.color = colors[Math.floor(Math.random() * colors.length)];
+            textEl.style.left = `${Math.random() * 100}vw`;
+            textEl.style.top = `${Math.random() * 100}vh`;
+            textEl.style.fontSize = `${14 + Math.random() * 10}px`;
+            document.body.appendChild(textEl);
+
+            setTimeout(() => {
+                textEl.classList.add("show");
+            }, 100);
+
+            setTimeout(() => {
+                textEl.classList.remove("show");
+                setTimeout(() => {
+                    document.body.removeChild(textEl);
+                }, 500);
+            }, 3000 + Math.random() * 2000);
+        }
+
+        setInterval(createText, 500);
+    </script>
+</body>
+</html>
